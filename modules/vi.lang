@@ -1,0 +1,74 @@
+<?php
+// Page
+	$lgTxt_lang                             = 'vi';
+	$lgTxt_social                           = 'Liên kết mạng xã hội';
+	$lgTxt_social_face                      = 'Liên kết Facebook';
+	$lgTxt_update                           = 'Dữ liệu rỗng... Bạn vui lòng quay lại sau!';
+	$lgTxt_error_page                       = 'Trang thông báo lỗi';
+	$lgTxt_page404                          = 'Link notfount';
+	$lgTxt_page404_click                    = 'click';
+	$lgTxt_page404_back                     = 'com back';
+
+	$lgTxt_detail                           = 'Xem chi tiết';
+	$lgTxt_view_all                         = 'Tất cả';
+
+	$lgTxt_date_post                        = 'Ngày ';
+	$lgTxt_date_post2                       = '';
+
+// Menu
+	$lgTxt_menu_home                        = 'Trang chủ';
+	$lgTxt_menu_about                       = 'Giới thiệu';
+	$lgTxt_menu_contact                     = 'Liên hệ';
+	$lgTxt_slug_contact                     = 'lien-he';
+
+// Contact
+	$txtContact_titleForm                   = 'Thắc mắc - Góp ý';
+	$txtContact_name		                = 'Họ và tên: (*)';
+	$txtContact_address	                    = 'Địa chỉ:';
+	$txtContact_email		                = 'Email:  (*)';
+	$txtContact_fone		                = 'Số điện thoại: (*)';
+	$txtContact_content	                    = 'Nội dung liên hệ: (*)';
+	$txtContact_button_s	                = 'Gửi đi';
+	$txtContact_sendOk		                = 'Xin chân thành cảm ơn Quý khách đã quan tâm và sử dụng dịch vụ của chúng tôi!<br>Yêu cầu của Quý khách đã gửi thành công. Chúng tôi sẽ phản hồi lại trong vòng 24h tới.<br>Chân thành cảm ơn!';
+	$txtContact_sendDie	                    = 'Không thể gửi thư vì một vài lỗi từ phía máy chủ.';
+
+    $txtEnter_field		                    = 'Trường dữ liệu bắt buộc.';
+    $txtEnter_email		                    = 'Địa chỉ email không hợp lệ.';
+    $txtEnter_tell		                    = 'Số điện thoại không hợp lệ.';
+	$txtEnter_number		                = 'Số không hợp lệ.';
+
+	$lgTxt_newsletter_title                 = 'Đăng ký nhận thông tin nhà đất:<br><i>(Chúng tôi sẽ nhanh chóng gọi lại cho bạn)</i>';
+	$lgTxt_newsletter_phone_input           = 'Nhập số điện thoại...';
+	$txtNewsletter_sendOk		            = 'Đăng ký số điện thoại nhận thông tin nhà đất thành công.';
+	$txtNewsletter_sendDie	                = 'Không thể thực hiện vì một vài lỗi từ phía máy chủ.';
+	$txtEmail_sendOk						= 'Your request has been sent successfully, we will promptly contact you back.';
+	$txtEmail_sendDie						= 'Unable to send mail for a few errors from the server side.';
+	$txtContact_sendOk2 = 'Your request has been sent successfully, we will promptly contact you back.';
+	$txtlogin 								= 'Đăng nhập';
+	$feedback								= 'Phản hồi';
+	$contact 								= 'Liên hệ';
+	$career  								= 'Nghề nghiệp';
+	$consumer_feedback  					= 'Phản hồi';
+	$copyright  							= 'Bản quyền';
+	$terms_conditions  						= 'Điều khoản';
+	$folow_us 								= 'Liên kết với chúng tôi';
+	$endterkeywork							= 'Nhập thông tin tìm kiếm';
+	$more 									= 'xem thêm';
+	$allproduct							    = 'Tất cả sản phẩm';
+	$lgTxt_realty_others 					= 'Sản phẩm khác';
+	$lgTxt_menu_cart						= 'Giỏ hàng';
+	$hinhanh 								= 'Hình ảnh';
+	$sanpham								= 'Sản phẩm';
+	$price 									= 'Đơn giá';
+	$soluong								= 'Số lượng';
+	$thanhtien								= 'Thành tiêd';
+	$huy									= 'Hủy';
+	$muahang 								= 'Mua hàng';
+	$capnhap 								= 'Cập nhật giỏ hàng';
+	$tieptuc 								= 'Tiếp tục mua hàng';
+	$cancel 								= 'Hủy đơn hàng';
+	$txtCode 								= 'Mã khuyến mãi';
+	$booking 								= 'Đặt chổ';
+	$footerEmail 							= 'ĐĂNG KÝ NHẬN EMAIL';
+	$go 									= 'GỬI';
+	$address_email							= 'Địa chỉ email';

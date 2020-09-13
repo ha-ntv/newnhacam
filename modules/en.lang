@@ -1,0 +1,87 @@
+
+<?php
+// Page
+	$lgTxt_lang                             = 'vi';
+	$lgTxt_social                           = 'social network link';
+	$lgTxt_social_face                      = 'Facebook link';
+	$lgTxt_update                           = 'Data is empty ... Please come back later!';
+	$lgTxt_error_page                       = 'Error message page';
+	$lgTxt_page404                          = 'Link notfount';
+	$lgTxt_page404_click                    = 'click';
+	$lgTxt_page404_back                     = 'com back';
+
+	$lgTxt_detail                           = 'See details';
+	$lgTxt_view_all                         = 'All';
+
+	$lgTxt_date_post                        = 'Date ';
+	$lgTxt_date_post2                       = '';
+// Menu
+	$lgTxt_menu_home                        = 'Home';
+	$lgTxt_menu_about                       = 'Introduce';
+	$lgTxt_menu_contact                     = 'Contact';
+	$lgTxt_slug_contact                     = 'lien-he';
+
+	$lgTxt_slug_filter                      = 'bat-dong-san';
+	$lgTxt_title_filter                     = 'Search for real estate';
+	$lgTxt_support_online                   = 'Advice - Customer support';
+	$lgTxt_realty_others                    = 'Product orther';
+
+
+// Contact
+	$txtContact_titleForm                   = 'Questions - Feedback';
+	$txtContact_name		                = 'Fullname: (*)';
+	$txtContact_address	                    = 'Address:';
+	$txtContact_email		                = 'Email:  (*)';
+	$txtContact_fone		                = 'Phone: (*)';
+	$txtContact_content	                    = 'Contact content: (*)';
+	$txtContact_button_s	                = 'Send';
+	$txtContact_sendOk		                = 'Thank you very much for your interest and use of our service! <br> Your request has been successfully submitted. We will respond to you within 24 hours. Thank you!';
+	$txtContact_sendDie	                    = 'Unable to send the message because of some server-side errors.';
+
+    $txtEnter_field		                    = 'Required field.';
+    $txtEnter_email		                    = 'Email address is not valid.';
+    $txtEnter_tell		                    = 'Invalid phone number.';
+	$txtEnter_number		                = 'Invalid number.';
+
+	$lgTxt_newsletter_title                 = 'Sign up for real estate information: <br> <i> (We will call you back soon) </i>';
+	$lgTxt_newsletter_phone_input           = 'Enter your phone number...';
+	$txtNewsletter_sendOk		            = 'Register the phone number to receive successful housing information.';
+	$txtNewsletter_sendDie	                = 'Unable to execute because of a few server-side errors.';
+	$txtEmail_sendOk						= 'Your request has been sent successfully, we will promptly contact you back.';
+	$txtEmail_sendDie						= 'Unable to send mail for a few errors from the server side.';
+	$txtContact_sendOk2 = 'Your request has been sent successfully, we will promptly contact you back.';
+	$txtlogin 								= 'Login';
+	$feedback								= 'Feedback';
+	$contact 								= 'Contact';
+	$career  								= 'Career';
+	$consumer_feedback  					= 'Consumer Feedback';
+	$copyright  							= 'Copyright';
+	$terms_conditions  						= 'Terms & Conditions';
+	$folow_us 								= 'FOLLOW US';
+	$endterkeywork							= 'Enter key word';
+	$more 									= 'more';
+	$allproduct							    = 'All Product';
+	$lgTxt_menu_cart						= 'Card';
+	$hinhanh 								= 'Image';
+	$sanpham								= 'Product';
+	$price 									= 'Price';
+	$soluong								= 'Amount';
+	$thanhtien								= 'Total';
+	$huy									= 'Cancel';
+	$muahang 								= 'Card';
+	$capnhap 								= 'Update Card';
+	$tieptuc 								= 'Continue Order';
+	$cancel 								= 'Cancel Order';
+	$txtCode 								= 'Code';
+	$booking 								= 'Booking';
+	$footerEmail 							= 'E-MAIL EXCLUSIVES';
+	$go 									= 'GO';
+	$address_email							= 'Email address';
+	$online 								= 'Online Delivery';
+	$email 									= 'Email';
+	$user 									= 'Họ tên';
+	$address 								= 'Địa chỉ';
+	$phone 								    = 'Điện thoại';
+	$timego									= 'Thời gian đến';
+	$amount									= 'Số lượng';
+	$comment 								= 'Chú thích';

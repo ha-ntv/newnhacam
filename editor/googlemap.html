@@ -1,0 +1,69 @@
+<html lang="vi">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+<meta name="language" content="vi">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPpkK2aVf_sVw5O09aRtplI0B2F3vAy5I&libraries=places&language=vi" async defer></script>
+<script type="text/javascript">
+var queryString = window.location.search.substring(1)
+queryString = queryString.split('&');
+x = queryString[0].split('=');
+map_x = x[1];
+y = queryString[1].split('=');
+map_y = y[1];
+z = queryString[2].split('=');
+map_z = z[1];
+if(queryString[3] != undefined){
+	img = queryString[3].split('=');
+	img = img[1] ? decodeURI(img[1]) : 'Undefined...';
+}else{
+	img = 'Undefined...';
+}
+
+window.onload = function(){
+	setinitialize(map_x, map_y, map_z, img);
+}
+</script>
+
+<script type="text/javascript">
+function setinitialize(the_x, the_y, the_z, the_img) {
+	if(the_x == '' || the_y == '' || the_z == ''){
+		var the_x = 16.0471585;
+		var the_y = 108.1712096;
+		var the_z = 14;
+	}
+	var icon = '../images/marker.png';
+	var myLatLng = {lat: parseFloat(the_x), lng: parseFloat(the_y)};
+	var geocoder = new google.maps.Geocoder;
+	var infowindow = new google.maps.InfoWindow;
+	var contentString = the_img;
+
+	var map = new google.maps.Map(document.getElementById('map_canvas'), {
+	  center: myLatLng,
+	  zoom: parseInt(the_z),
+	  mapTypeId: google.maps.MapTypeId.ROADMAP
+	});
+
+	var markers = new google.maps.Marker({
+		position: myLatLng,
+		map: map,
+		draggable: false,
+		animation: google.maps.Animation.DROP,
+		icon: icon
+	  });
+	
+	infowindow.setContent(contentString);
+	infowindow.open(map, markers);
+	
+	google.maps.event.addListener(markers, 'click', function() {
+		infowindow.setContent(contentString);
+		infowindow.open(map, markers);
+	});	
+}
+</script>
+</head>
+<body onUnload="GUnload()" style="margin: 0 auto; padding: 0; overflow: hidden;">
+<div id="map_canvas" style="width:100%; height:99%;"></div>
+</body>
+</html>
