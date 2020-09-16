@@ -61,7 +61,7 @@
 }
   ?>
 
- <li class="cart" id="cart_items"><a class="animated"><img src="/img/responsive/cart.png" alt="" width="31" height="30">
+ <li class="cart" id="cart_items" style="display:none;"><a class="animated"><img src="/img/responsive/cart.png" alt="" width="31" height="30">
      <?php
       if ($total_item != 0) {
       ?>

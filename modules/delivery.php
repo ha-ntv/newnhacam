@@ -51,7 +51,9 @@ if (!defined('TTH_SYSTEM')) {
 <div class="nav-product-wrapper hidden-md-up m-t">
     <div class="nav-product-menu-responsive hidden-md-up">
         <i class="fa fa-play"></i>
-        <span style="color:#009f4e;font-size: 24px;line-height: 52px"><?= $allproduct ?></span>
+        <span class="txt-inside" style=""><?= $allproduct ?></span>
+        <span class="right-img" id="set-grid"><img src="/images/grid.svg"></span>
+        <span class="right-img" id="set-list"><img src="/images/list.svg"></span>
     </div>
 </div>
 <div class="hidden-md-up" style="background:#eeeeee;position: relative;display:none">

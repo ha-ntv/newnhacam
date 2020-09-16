@@ -231,10 +231,10 @@ if (!defined('TTH_SYSTEM')) {
           $('.nav-product-menu-responsive, .home-product-menu-mobile, .line-between-nav-product, .overlay-menu-product').addClass('affix');
         } else $('.nav-product-menu-responsive, .home-product-menu-mobile, .line-between-nav-product, .overlay-menu-product').removeClass('affix');
       });
-      $(document).on('click', '.nav-product-menu-responsive', function() {
+      $(document).on('click', '.txt-inside', function() {
 
-        $(this).parent().next('.hidden-md-up').toggle();
-        $(this).parent().next('.hidden-md-up').find('.overlay-menu-product').toggle();
+        $(this).parent().parent().next('.hidden-md-up').toggle();
+        $(this).parent().parent().next('.hidden-md-up').find('.overlay-menu-product').toggle();
 
       });
       $(document).on('click', '.overlay-menu-product', function() {

@@ -17,8 +17,8 @@ if ($cart_info['total']) {
 		if($rows[0]['others_menu_id'] == 9) {
 			if($cart_info['total'] >= (int)$rows[0]['p_max'] && $rows[0]['km'] >= $km ) {
 				$km_value = $rows[0]['km'];
-				$leg1 = (int)getConstant('shipping_rate1', 'comment');
-				$leg2 = (int)getConstant('shipping_rate2', 'comment');
+				$leg1 = intval(getPage('shipping_rate1', 'comment'));
+				$leg2 = intval(getPage('shipping_rate2', 'comment'));
 				$cal_value = $km_value <= 2 ? $leg1 : $leg1 + ($km_value-2)*$leg2;
 				$response['success'] = true;
 				$response['freeship'] = true;

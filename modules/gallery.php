@@ -22,7 +22,7 @@
 		</div>
 	</div>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
 	<div class="wrap-list list-layout grid-wrap clearfix">
 		<ul id="grid" class="grid swipe-rotate loaded">
 			<?php 

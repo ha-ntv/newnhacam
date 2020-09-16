@@ -87,7 +87,7 @@ if ($id != 0) {
 					<div class="modal-header shadow-sm" style="padding-top:45px">
 						<div class="d-menu-item  no-gutters">
 							<div class=" col-auto">
-								<div class="menu-item-img"><img src="<?php echo $img_src; ?>" class="img-fluid" alt="" style="max-width:100px"></div>
+								<div class="menu-item-img"><a data-fancybox="images" href="<?php  echo $img_src; ?>"><img src="<?php echo $img_src; ?>" class="img-fluid" alt="" style="max-width:100px"></a></div>
 							</div>
 							<div class="col" style="width: calc(100% - 100px)">
 								<div class="menu-item-content">
@@ -106,6 +106,8 @@ if ($id != 0) {
 						</div>
 					</div>
 					<div class="modal-body" id="cart-item-mb">
+						<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
+						<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
 						<div class="menu-item-input" style="display:flex">
 							<input type="hidden" name="pro-id" value="<?php echo $row['product_id']?>" >
 							<img class="svg-inline menu-item-input-icon" src="/images/cart-pen.svg" >

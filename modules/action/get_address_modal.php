@@ -10,34 +10,12 @@
           </nav>
         </div>
       </div>
-      <div class="modal-body" style="margin-top:50px;">
-        <div >
-            <div id="map" style="display:none"></div>
-            <div class="embed-responsive-item">
-                <div class="woocommerce-billing-fields__field-wrapper">
-                    <p class="form-row form-row-wide validate-required validate-phone validate-required validate-phone" id="billing_phone_field">
-                        <label for="billing_phone" class="">Số điện thoại<span class="required">*</span></label>
-                        <input type="text" class="input-text" name="billing_phone" id="billing_phone" placeholder="" value="" autocomplete="tel">
-                    </p>
-                    <div class="label_error" id="error_phone"></div>
-                    <p class="form-row form-row-wide address-field validate-required validate-required" id="main_address_field">
-                        <label for="main_address" class="">Địa chỉ<span class="required">*</span></label>
-                        <input type="text" class="input-text pac-target-input" name="main_address" id="main_address" placeholder="Street address" value="" onFocus="geolocate()" required="">
-                    </p>
-                    <div class="label_error" id="error_address"></div>
-                </div>
-			</div>
-			<div id="distance"></div>
-			<input type="hidden" name="hidden_input" id="km_distance" value="0">
-			<input type="hidden" name="hidden_cal" id="cal_shipping" value="0">
-        </div>
-      </div>
-    </div>
-    <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfPZhOobyQI9SCUhFCAxO7FaSBWIKTrRQ&libraries=places&callback=initMap"></script>
+	  <div class="modal-body" style="margin-top:50px;">
+	  <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfPZhOobyQI9SCUhFCAxO7FaSBWIKTrRQ&libraries=places&callback=initMap"></script>
 	<script type='text/javascript'>
 		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 			directionsService.route({
-			origin: "150 Nguyễn Văn Linh, Vĩnh Trung, Thanh Khê District, Da Nang",
+			origin: "120 Nguyễn Văn Linh, Vĩnh Trung, Q. Thanh Khê, Đà Nẵng, Việt Nam",
 			destination: document.getElementById('main_address').value,
 			travelMode: google.maps.TravelMode.DRIVING
 			}, function(response, status) {
@@ -46,12 +24,14 @@
 					var htmlReturn = '';
 					var route = response.routes[0];
 					var km = route.legs[0].distance.text;
-					 km = km.split(" ")[0];
-					 km = km.replace(',', '.');
+					
+					km = km.split(" ")[0];
+					console.log('km is', km)
+					km = km.replace(',', '.');
 					document.getElementById('distance').innerHTML = 'Khoảng cách là '+ km + ' km';
 					document.getElementById('km_distance').value = km;
-					var leg1 = <?php  echo getConstant('shipping_rate1', 'comment'); ?>
-					var leg2 = <?php echo (int)getConstant('shipping_rate2', 'comment'); ?>
+					var leg1 = <?php  echo getPage('shipping_rate1', 'comment'); ?>;
+					var leg2 = <?php echo getPage('shipping_rate2', 'comment'); ?>;
 					var shippingCost = km <=2 ? leg1 : ((+leg1) + (+km-2)*(+leg2))
 					document.getElementById('cal_shipping').value = shippingCost;
 				}
@@ -115,4 +95,27 @@
 			}
 		}
 	</script>
+        <div >
+            <div id="map" style="display:none"></div>
+            <div class="embed-responsive-item">
+                <div class="woocommerce-billing-fields__field-wrapper">
+                    <p class="form-row form-row-wide address-field validate-required validate-required" id="main_address_field">
+                        <label for="main_address" class="">Địa chỉ<span class="required">*</span></label>
+                        <input type="text" class="input-text pac-target-input" name="main_address" id="main_address" placeholder="Street address" value="" onFocus="geolocate()" required="">
+                    </p>
+					<div class="label_error" id="error_address"></div>
+					<p class="form-row form-row-wide validate-required validate-phone validate-required validate-phone" id="billing_phone_field">
+                        <label for="billing_phone" class="">Số điện thoại<span class="required">*</span></label>
+                        <input type="text" class="input-text" name="billing_phone" id="billing_phone" placeholder="" value="" autocomplete="tel">
+                    </p>
+                    <div class="label_error" id="error_phone"></div>
+                </div>
+			</div>
+			<div id="distance"></div>
+			<input type="hidden" name="hidden_input" id="km_distance" value="0">
+			<input type="hidden" name="hidden_cal" id="cal_shipping" value="0">
+		</div>
+		
+      </div>
+    </div>
   </div>

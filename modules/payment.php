@@ -395,6 +395,7 @@ if (!$isMobile) :
 	</script>
 <?php endif; ?>
 <?php if ($isMobile) : ?>
+<script type="text/javascript" src="/js/jquery.toaster.js"></script>
 	<div id="modal-confirm">
 		<div class="modal-dialog" role="document">
 		<?php 
@@ -411,7 +412,7 @@ if (!$isMobile) :
 						</nav>
 					</div>
 				</div>
-				<div class="modal-body" id="payment_mb_modal">
+				<div class="modal-body" id="payment_mb_modal" style="overflow-y:auto">
 					<hr class="hr-space">
 					<section class="o-menu">
 						<div class="container">

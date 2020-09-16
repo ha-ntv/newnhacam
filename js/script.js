@@ -164,7 +164,7 @@ function sendMail(type, id) {
             } else {
             	alert(data);
             }
-           if(type == 'send_order2') window.location.href = '/'
+           if(type == 'send_order2') window.location.href = '/thank-you-reservation'
         }
     });
     return false;
@@ -499,7 +499,7 @@ $(document).ready(function(){
 					if (data.success) {
 						$('#voucher').val(code);
 						$('#mobile-address-promote-modal').modal('hide');
-						$('.promo-code-btn').append('<div id="after-code"><div class="o-function-note text-truncate">'+code+'</div></div>')
+						$('.promo-code-btn').append('<div id="after-code"><div class="o-function-note ">'+code+'</div></div>')
 						$('#promo-part').show();
 						$('#promo-calc').text(parseInt(data.value).toLocaleString('de-DE') + 'đ');
 						var current = parseInt($('#pm-total-cart').text().slice(0,-1).replace(/\./g, ''));
@@ -568,11 +568,16 @@ $(document).ready(function(){
 	$(document).on('click', '.modal-close-address', function(){
 		var address = $('#main_address').val();
 		var km = $('#km_distance').val();
+		var phone = $('#billing_phone').val();
 		var shippingCost = $('#cal_shipping').val() ? parseInt($('#cal_shipping').val()): 0;
 		$('#shipping-calc').text(shippingCost.toLocaleString('de-DE') + 'đ');
 		$('#shipping-part').show()
-		$('.address-btn').append('<div id="after-address"><div class="o-function-note text-truncate"> Khoảng cách: '+km+' km</div></div>')
-		$('#payment_mb_modal').append('<div id="address_mb"><hr class="hr-space o-hr"><section class="address-section"> Địa chỉ ship: '+address+'</section></div>')
+		$('#after-address').remove()
+		$('#address_mb').remove()
+		$('#phone_mb').remove()
+		$('.address-btn').append('<div id="after-address"><div class="o-function-note "> Khoảng cách: '+km+' km</div></div>')
+		$('#payment_mb_modal').append('<div id="address_mb"><hr class="hr-space o-hr"><section class="address-section"> Địa chỉ ship: <span id="input-address">'+address+'</span></section></div>')
+		$('#payment_mb_modal').append('<div id="phone_mb"><hr class="hr-space o-hr"><section class="phone-section"> Số điện thoại:<span id="phone-mb">'+phone+'</span></section></div>')
 		$('#note-address-promo').append('<div class="o-function-item modal-button promo-code-btn"><div class="o-function-img " ><img src="/images/cart-tag.svg" class="inline-svg"></div><div class="o-function-note text-truncate"><span class="false align-middle">Promotion</span></div></div>')
 	})
 	$(document).on('click', '.modal-close-update-cart', function(){
@@ -620,17 +625,31 @@ $(document).ready(function(){
 	//	$('#mobile-cart-info-modal').modal('hide');
 	})
 	$('#checkout_btn').click(function(){
-		showLoader();
-		$.ajax({
-			url:'/action.php',
-			type: 'POST',
-			data: 'url=send_order1',
-			dataType: "html",
-			success: function(data){
-				closeLoader();
-				window.location.href = '/thank-you-reservation'
-			}
-		});
+		var code = $('#after-code').text();
+		var shipping = $('#shipping-calc').text().replace(/\./g, '');
+		var promo = $('#promo-calc').text().replace(/\./g, '');
+		var phone = $('#phone-mb').text();
+		var address = $('#input-address').text();
+		if(address && phone && shipping)  {
+			showLoader();
+			$.ajax({
+				url:'/action.php',
+				type: 'POST',
+				data: 'url=send_order2&shipping='+shipping+'&code='+code+'&promo='+promo+'&phone='+phone,
+				dataType: "html",
+				success: function(data){
+					closeLoader();
+					window.location.href = '/thank-you-reservation'
+				}
+			});
+		} else {
+			if(!address ) $.toaster({ priority :'danger', title :'Lỗi', message :'Bạn phải nhập địa chỉ'});
+			if(address && !shipping) $.toaster({ priority :'danger', title :'Lỗi', message :'Địa chỉ không hợp lệ'});
+			if(!phone) $.toaster({ priority :'danger', title :'Lỗi', message :'Bạn phải nhập số điện thoại'});
+			if(phone &&  !/^0\d{9}$/.test(phone)) $.toaster({ priority :'danger', title :'Lỗi', message :'Số điện thoại không hợp lệ'});
+			
+		}
+		
 	})
 	$('.code-copy').click(function(event) {
 		var _this = this;
@@ -662,4 +681,14 @@ $(document).ready(function(){
 			$(_this).text('Copy code');
 		},2000)
 	});
+	$(document).on('click', '#set-list', function(){
+		$('.list-realty .healthymenuProductBox ').each(function(){
+			$(this).addClass('full-width');
+		})
+	})
+	$(document).on('click', '#set-grid', function(){
+		$('.list-realty .healthymenuProductBox ').each(function(){
+			$(this).removeClass('full-width');
+		})
+	})
 })
