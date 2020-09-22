@@ -9,7 +9,7 @@ if (!defined('TTH_SYSTEM')) { die('Please stop!'); }
 			<a href="<?php echo ADMIN_DIR?>"><i class="fa fa-home"></i> Trang chủ</a>
 		</li>
 		<li>
-			<i class="fa fa-flag"></i> Thay đổi ngôn ngữ của CSDL
+			<i class="fa fa-flag"></i> Thay đổi địa điểm
 		</li>
 	</ol>
 </div>
@@ -17,13 +17,16 @@ if (!defined('TTH_SYSTEM')) { die('Please stop!'); }
 <?php
 if(isset($_GET['lang'])) {
 	$lang = $_GET['lang'];
-	if(in_array($lang, array('en', 'vi'))) {
-		$_SESSION["lang_admin"] = $lang;
-		loadPageSucces("Thay đổi ngôn ngữ CSDL thành công.", ADMIN_DIR);
+	
+	if(in_array($lang, array('HUE', 'DN'))) {
+		
+		$_SESSION['admin_city'] = $lang;
+		
+		loadPageSucces("Thay đổi địa điểm thành công.", ADMIN_DIR);
 	} else {
-		loadPageAdmin("Ngôn ngữ không tồn tại trong CSDL, vui lòng thực hiện lại.", ADMIN_DIR);
+		loadPageAdmin("Địa điểm không tồn tại trong CSDL, vui lòng thực hiện lại.", ADMIN_DIR);
 	}
 
 } else {
-	loadPageAdmin("Ngôn ngữ rỗng, vui lòng thực hiện lại.", ADMIN_DIR);
+	loadPageAdmin("Địa điểm rỗng rỗng, vui lòng thực hiện lại.", ADMIN_DIR);
 }

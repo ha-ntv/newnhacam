@@ -76,17 +76,17 @@ $date = new DateClass();
 	<?php } ?>
 	<li class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			<img height="20px" src="images/f_<?php echo TTH_LANGUAGE?>.png"> <i class="fa fa-database fa-fw fa-lg"></i> <i class="fa fa-caret-down"></i>
+			<?php echo showCityAdmin() ?> <i class="fa fa-database fa-fw fa-lg"></i> <i class="fa fa-caret-down"></i>
 		</a>
 		<ul class="dropdown-menu">
 			<div class="node-hv">&nbsp;</div>
 			<li>
-				<a href="javascript:_postback();" onclick="Forward('?<?php echo TTH_PATH?>=set_language&lang=vi');"><img height="25px" src="images/f_vi.png">&nbsp; (vi-vn)</a>
+				<a href="javascript:_postback();" onclick="Forward('?<?php echo TTH_PATH?>=set_language&lang=DN');">&nbsp; (Đà Nẵng)</a>
 			</li>
 			
 			<li class="divider"></li>
 			<li>
-				<a href="javascript:_postback();" onclick="Forward('?<?php echo TTH_PATH?>=set_language&lang=en');"><img height="25px" src="images/f_en.png">&nbsp; (en-us)</a>
+				<a href="javascript:_postback();" onclick="Forward('?<?php echo TTH_PATH?>=set_language&lang=HUE');">&nbsp; (Huế)</a>
 			</li>
 			
 		</ul>

@@ -7,8 +7,11 @@ $_SESSION["language"] = (!empty($_SESSION["lang_admin"]) && isset($_SESSION["lan
 
 require_once('..' . DIRECTORY_SEPARATOR . 'define.php');
 include_once(_A_FUNCTIONS . DS . "Function.php");
+$local_admin = !empty($_SESSION['admin_city']) ? $_SESSION['admin_city'] : 'DN';
+$qradmin = $local_admin == 'DN' ? 'vi': 'hue';
+$DB_NAME =  $CONFIG[$qradmin]['tth_db_name'];
 try {
-	$db =  new ActiveRecord(TTH_DB_HOST, TTH_DB_USER, TTH_DB_PASS, TTH_DB_NAME);
+	$db =  new ActiveRecord(TTH_DB_HOST, TTH_DB_USER, TTH_DB_PASS, $DB_NAME);
 }
 catch(DatabaseConnException $e) {
 	echo $e->getMessage();

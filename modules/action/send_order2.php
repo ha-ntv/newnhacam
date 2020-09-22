@@ -4,13 +4,23 @@ ini_set('error_log','./hantv');
 // test me
 	$date = new DateClass();
 	$stringObj = new String();
-	
+	$address = $_POST['address'];
 	$txtTel         = $_POST['phone'];
+	$order_time         = $_POST['time'];
 	$code           = $_POST['code'];
 	$shipping 		= isset($_POST['shipping']) ? $_POST['shipping']+0 : 0 ;
 	$promo 			= isset($_POST['promo']) ? $_POST['promo']+0 : 0;
+	$payment 			= isset($_POST['payment']) ? $_POST['payment']+0 : 0;
 	$total = 0;
 	$total_item = 0;
+	$response = '<div class="order_info_redirect">
+					<section class="order_address"><strong>Giao đến: </strong><br>
+						<p>'.$address.'</p>
+						<p>Thời gian đặt: '.date("d/m/Y h:i").'</p>
+					</section>
+					<section class="detail_order_area">
+						<h3>Nhà Cám</h3>
+						<div class="inside_order">';
 	if($code != ''){
 		$db->table = "others";
 		$db->condition = "is_active = 1 and name like '".$code."'";
@@ -49,7 +59,7 @@ ini_set('error_log','./hantv');
 	$str = empty($item) ? 0 : implode(",",$item);
 	$db->table = "product";
 	$db->condition = "is_active = 1 and product_id IN ($str)";
-	$db->product = "";
+	$db->order = "";
 	$db->limit = "";
 	$rows_product = $db->select();
 	if($db->RowCount>0) {
@@ -85,10 +95,22 @@ ini_set('error_log','./hantv');
 			$product .= '<label style="font-weight:600;padding-left:12px;">Hình ảnh: </label><br><label style="padding-left:12px;padding-bottom:3px;">'. $img_product .'</label><br>';
 		
 			$product .= $price;
-            $product .=  '<label style="font-weight:400;padding-left:12px;">Ghi chú : ' .(isset($_SESSION['note'][$key][$ele['key']])? $_SESSION['note'][$key][$ele['key']]:"") . '</label><br>';
-			
+			$product .=  '<label style="font-weight:400;padding-left:12px;">Ghi chú : ' .(isset($_SESSION['note'][$key][$ele['key']])? $_SESSION['note'][$key][$ele['key']]:"") . '</label><br>';
+			$response .= '<div class="each_order_item">';
+			$response .= '<div class="inner_img">'.$img_product.'<span class="quantity">x'.$ele['amount'].'</span></div>';
+			$response .= '<div class="dish_info">'.$alt.'<div class="topping_list">'.showTopping($ele['topping']).'</div></div>';
+			$response .= '<div class="price_info"><strong>'.formatNumberVN($ele['total']).'đ</strong></div>';
+			$response .= '</div>';
 		}
 	}
+	$response .='</div>';
+	$response .='<div class="order_summary">';
+	$response .='<div class="order_sum bold">Tổng('.$total_item.' phần)<span class="money">'.formatNumberVN($total).'đ</span></div>';
+	$response .='<div class="order_sum">Phí giao hàng:<span class="money">'.formatNumberVN($shipping).'đ</span></div>';
+	if($promo > 0) $response .='<div class="order_sum">Giảm giá:<span class="money">'.formatNumberVN($promo).'đ</span></div>';
+	$response .='<div class="order_totality">Tổng cộng: <span class="money">'.formatNumberVN($total + $shipping - $promo).'đ</span></div>';
+	$response .='</div>';
+	
 	if(empty($HTTP_X_FORWARDED_FOR)) $IP_NUMBER = getenv("REMOTE_ADDR");
 	else $IP_NUMBER = $HTTP_X_FORWARDED_FOR;
 	$domain = $_SERVER['HTTP_HOST'];
@@ -105,7 +127,7 @@ ini_set('error_log','./hantv');
 		
 	}
 	$message .= '<label style="font-weight:600;padding-left:12px;">Tổng thanh toán: </label> ' . number_format($total + $shipping - $promo, '0', ',', '.') . '<br/>';
-	$message .= '<label style="font-weight:600;padding-left:12px;">Ngày đặt: </label> '.$datetime_now.'<br/></p></td></tr></tbody></table><div style="min-height:35px">&nbsp;</div><table width="100%" border="0" cellpadding="0" cellspacing="0" align="center"><tbody><tr><td bgcolor="#e1e1e1" style="padding:15px 10px 25px"><table border="0" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto;min-width:290px;" width="620"><tbody><tr><td><table width="80%" cellpadding="0" cellspacing="0" border="0" align="left"><tbody><tr><td valign="top" style="font-size:12px;color:#5e5e5e;font-family:Arial,serif;line-height:15px;">' . getConstant('meta_site_name') . '</td></tr></tbody></table><table width="20%" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td style="font-size:13px;color:#5e5e5e;font-family:Arial,serif;line-height:1;vertical-align:top;text-align:right;font-style:italic;"><span>Follow us on</span><br><a href="' . getConstant('link_facebook') . '" target="_blank"><img src="https://ci5.googleusercontent.com/proxy/PMSfAkbhhMLEe-tDCLFilReG-hlq_DWsTblTQ2qp8Dsq9KFW1UyFcKTr_uwU3EqyR8AhiFIooeExoAw9Oe3G5c6hvIEoOnU=s0-d-e1-ft#https://www.livecoding.tv/static/img/email/fb.png" width="27" height="27" alt="Facebook logo" title="Facebook" border="0" style="padding:3px;"></a>&nbsp;<a href="' . getConstant('link_twitter') . '" target="_blank"><img src="https://ci3.googleusercontent.com/proxy/GNHxgrYKL99Apyic0XnGYk6IqVZAc-wFuhgCDxzBYMr80NGggmI1nRORIBVRIkPkJHbQHGGMrTFtbzTDoxk5dc0i_H0HOc0=s0-d-e1-ft#https://www.livecoding.tv/static/img/email/tw.png" width="27" height="27" alt="Twitter logo" title="Twitter" border="0" style="padding:3px;"></a></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></div>';
+	$message .= '<label style="font-weight:600;padding-left:12px;">Ngày đặt: </label> '.$datetime_now.'<br/></p><p><label style="font-weight:600;padding-left:12px;">Địa chỉ giao hàng: </label>'.$address.'</p></td></tr></tbody></table><div style="min-height:35px">&nbsp;</div><table width="100%" border="0" cellpadding="0" cellspacing="0" align="center"><tbody><tr><td bgcolor="#e1e1e1" style="padding:15px 10px 25px"><table border="0" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto;min-width:290px;" width="620"><tbody><tr><td><table width="80%" cellpadding="0" cellspacing="0" border="0" align="left"><tbody><tr><td valign="top" style="font-size:12px;color:#5e5e5e;font-family:Arial,serif;line-height:15px;">' . getConstant('meta_site_name') . '</td></tr></tbody></table><table width="20%" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td style="font-size:13px;color:#5e5e5e;font-family:Arial,serif;line-height:1;vertical-align:top;text-align:right;font-style:italic;"><span>Follow us on</span><br><a href="' . getConstant('link_facebook') . '" target="_blank"><img src="https://ci5.googleusercontent.com/proxy/PMSfAkbhhMLEe-tDCLFilReG-hlq_DWsTblTQ2qp8Dsq9KFW1UyFcKTr_uwU3EqyR8AhiFIooeExoAw9Oe3G5c6hvIEoOnU=s0-d-e1-ft#https://www.livecoding.tv/static/img/email/fb.png" width="27" height="27" alt="Facebook logo" title="Facebook" border="0" style="padding:3px;"></a>&nbsp;<a href="' . getConstant('link_twitter') . '" target="_blank"><img src="https://ci3.googleusercontent.com/proxy/GNHxgrYKL99Apyic0XnGYk6IqVZAc-wFuhgCDxzBYMr80NGggmI1nRORIBVRIkPkJHbQHGGMrTFtbzTDoxk5dc0i_H0HOc0=s0-d-e1-ft#https://www.livecoding.tv/static/img/email/tw.png" width="27" height="27" alt="Twitter logo" title="Twitter" border="0" style="padding:3px;"></a></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></div>';
 	$db->table = "order";
 	$data = array(
 		'phone'=>$db->clearText($txtTel),
@@ -123,11 +145,17 @@ ini_set('error_log','./hantv');
 	$order_code = "NHACAM_".date('Y'). "_".$id_order ;
 	$dt = array('order_code' => $order_code);
 	$db->update($dt);
-	
+	$response .='<section class="detail_all">
+					<h3>Chi tiết đơn hàng</h3>
+					<div class="order_sum">Mã đơn hàng: <span class="money">'.$order_code.'</span></div>
+					<div class="order_sum">Thời gian đặt: <span class="money">'.$order_time.'</span></div>
+					<div class="order_sum">Phương thức thanh toán: <span class="money">'. ($payment == 0 ? 'Tiền mặt': 'Chuyển khoản').'</span></div>
+				</section>
+				</div>';
 	unset($_SESSION['cart']);
 	
     if($id_order)
 
-		echo $txtContact_sendOk;
+		echo $response;
 	else
 		echo $txtContact_sendDie;

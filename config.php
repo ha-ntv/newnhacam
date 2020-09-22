@@ -11,3 +11,7 @@ $CONFIG['vi']['tth_db_host'] = 'localhost';
 $CONFIG['vi']['tth_db_user'] = 'hademo_vn';
 $CONFIG['vi']['tth_db_pass'] = 'login@123!';
 $CONFIG['vi']['tth_db_name'] = 'hademo_vn';
+$CONFIG['hue']['tth_db_host'] = 'localhost';
+$CONFIG['hue']['tth_db_user'] = 'hademo_vn';
+$CONFIG['hue']['tth_db_pass'] = 'login@123!';
+$CONFIG['hue']['tth_db_name'] = 'hademo_hue';

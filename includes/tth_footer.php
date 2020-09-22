@@ -147,7 +147,7 @@ if (!defined('TTH_SYSTEM')) {
   $('body').on('click', '.btnAddtocartText', function(e) {
     var that = this;
     var a = $(this).siblings('input[name="id"]').val();
-
+    var children = $(this).data('children');
     if ($(window).width() >= 768) {
       $.ajax({
         url: '/action.php',
@@ -163,22 +163,36 @@ if (!defined('TTH_SYSTEM')) {
       var now = $('#cart_items .totalProduct').text();
       if (now != "") now = Number(now) + 1;
       else now = 1;
-      $.ajax({
-        url: '/action.php',
-        type: 'POST',
-        data: 'url=add_cart1&id=' + a + '&qty=1',
-        dataType: "json",
-        success: function(data) {
-          closeLoader();
-          $('.cart-list-responsive1').html(data.html);
-          if ($('#cart_items .totalProduct').length)
-            $('#cart_items .totalProduct').text(now);
-          else $('#cart_items a').append('<span class="totalProduct">1</span>')
-          $('#total-item-cart').text(data.total_item)
-          $('#total-value-cart').text(+data.total.toLocaleString('de-DE') + 'đ');
-          $('#d-cart').show();
-        }
-      });
+      if (children == 0 || !children)
+        $.ajax({
+          url: '/action.php',
+          type: 'POST',
+          data: 'url=add_cart1&id=' + a + '&qty=1',
+          dataType: "json",
+          success: function(data) {
+            closeLoader();
+            $('.cart-list-responsive1').html(data.html);
+            if ($('#cart_items .totalProduct').length)
+              $('#cart_items .totalProduct').text(now);
+            else $('#cart_items a').append('<span class="totalProduct">1</span>')
+            $('#total-item-cart').text(data.total_item)
+            $('#total-value-cart').text((+data.total).toLocaleString('de-DE') + 'đ');
+            $('#d-cart').show();
+          }
+        });
+      else {
+        $.ajax({
+            url: '/action.php',
+            type: 'POST',
+            data: 'url=getmodal&id=' + a,
+            dataType: 'html',
+            success: function(data) {
+                closeLoader();
+                $('#healthymenu-modal').html(data);
+                $('#healthymenu-modal').modal('show');
+            }
+        });
+      }
     }
   });
   $(".owl-carousel").owlCarousel({
@@ -227,9 +241,12 @@ if (!defined('TTH_SYSTEM')) {
       $(window).scroll(function() {
         var top = $(window).scrollTop();
         if (top > 66) {
-
+          $('.search_area').addClass('affix');
           $('.nav-product-menu-responsive, .home-product-menu-mobile, .line-between-nav-product, .overlay-menu-product').addClass('affix');
-        } else $('.nav-product-menu-responsive, .home-product-menu-mobile, .line-between-nav-product, .overlay-menu-product').removeClass('affix');
+        } else {
+          $('.nav-product-menu-responsive, .home-product-menu-mobile, .line-between-nav-product, .overlay-menu-product').removeClass('affix');
+          $('.search_area').removeClass('affix');
+        }
       });
       $(document).on('click', '.txt-inside', function() {
 
@@ -286,7 +303,7 @@ if (!defined('TTH_SYSTEM')) {
 </script>
 <?php
 $isMobile = preg_match("/(android|webos|avantgo|iphone|ipad|ipod|blackberry|iemobile|bolt|boost|cricket|docomo|fone|hiptop|mini|opera mini|kitkat|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
-if ($isMobile) :
+// if ($isMobile) :
   $cartInfo = calculateCart();
   if ($cartInfo['total_item'] > 0) $display = 'block';
   else $display = 'none';
@@ -307,11 +324,12 @@ if ($isMobile) :
   </div>
 
   <div class="d-filter-material have-cart" id="open_category">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.75 19.44" class="svg-inline">
+  <!--  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.75 19.44" class="svg-inline">
       <path d="M20.25,0H1.5a1.5,1.5,0,0,0,0,3H20.25a1.5,1.5,0,0,0,0-3Z"></path>
       <path d="M20.25,16.44H1.5a1.5,1.5,0,0,0,0,3H20.25a1.5,1.5,0,0,0,0-3Z"></path>
       <path d="M20.25,8.31H1.5a1.5,1.5,0,0,0,0,3H20.25a1.5,1.5,0,0,0,0-3Z"></path>
-    </svg>
+    </svg>-->
+    <img src="/images/logo.png" class="svg-inline category">
   </div>
   <div id="note_menu" class="menu-popup modal hide fade fade-only" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true" style="top:0px;">
     <div class="modal-dialog mobile-modal" role="document">
@@ -345,9 +363,9 @@ if ($isMobile) :
       <div class="modal-body ">
         <div class="dialog ">
           <div class="dialog-inner">
-            <div class="dialog-title">Note</div>
+            <div class="dialog-title">Ghi chú món</div>
             <div class="dialog-input-field dialog-input-double item-input">
-              <input type="hidden" name="id" value="0" >
+              <input type="hidden" name="id" value="0">
               <input type="hidden" name="key" value="0">
               <div class="item-input-wrap"><input type="text" class="dialog-input" value=""></div>
             </div>
@@ -359,4 +377,4 @@ if ($isMobile) :
   </div>
   <div id="mobile-address-promote-modal" class="menu-popup modal hide fade fade-only" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true" style="top:0px;"></div>
   <div id="mobile-cart-info-modal" class="menu-popup modal hide fade fade-only" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true" style="top:0px;"></div>
-<?php endif; ?>
+<?php // endif; ?>

@@ -1,44 +1,44 @@
-@font-face{
-	font-family:'harmonia';
-	src:url(../fonts/RV-Harmonia-Regular.eot);
-	src:url(../fonts/RV-Harmonia-Regular.eot?#iefix) format('embedded-opentype') , 		url(../fonts/RV-Harmonia-Regular.woff) format('woff') ,
-		url(../fonts/RV-Harmonia-Regular.ttf) format('truetype') , 		url(../fonts/RV-Harmonia-Regular.svg#roboto_condensedregular) format('svg');
-	font-weight:400;
-}
-@font-face{
-	font-family:'harmonia';
-	src:url(../fonts/RV-Harmonia-Light.eot);
-	src:url(../fonts/RV-Harmonia-Light.eot?#iefix) format('embedded-opentype'),
-		url(../fonts/RV-Harmonia-Light.woff) format('woff') ,
-		url(../fonts/RV-Harmonia-Light.ttf) format('truetype') , 		url(../fonts/RV-Harmonia-Light.svg#roboto_condensedregular) format('svg');
-	font-weight:200;
-}
-@font-face{
-	font-family:'harmonia';
-	src:url(../fonts/RV-Harmonia-SemiBold.eot);
-	src:url(../fonts/RV-Harmonia-SemiBold.eot?#iefix) format('embedded-opentype'), 		url(../fonts/RV-Harmonia-SemiBold.woff) format('woff') ,
-		url(../fonts/RV-Harmonia-SemiBold.ttf) format('truetype') , 		url(../fonts/RV-Harmonia-SemiBold.svg#roboto_condensedregular) format('svg');
-	font-weight:500;
-}
-@font-face{
-	font-family:'harmonia';
-	src:url(../fonts/RV-Harmonia-Bold.eot);
-	src:url(../fonts/RV-Harmonia-Bold.eot?#iefix) format('embedded-opentype'),
-		url(../fonts/RV-Harmonia-Bold.woff) format('woff') ,
-		url(../fonts/RV-Harmonia-Bold.ttf) format('truetype') , 		url(../fonts/RV-Harmonia-Bold.svg#roboto_condensedregular) format('svg');
-	font-weight:600;
-}
-@font-face{
-	font-family:'Tiempos';
-	src:url(../fonts/TiemposHeadline-Medium.eot);
-	src:url(../fonts/TiemposHeadline-Medium.eot?#iefix) format('embedded-opentype'), 		url(../fonts/TiemposHeadline-Medium.woff) format('woff') ,
-		url(../fonts/TiemposHeadline-Medium.ttf) format('truetype') , 		url(../fonts/TiemposHeadline-Medium.svg#roboto_condensedregular) format('svg');
-	font-weight:400;
-}
-@font-face{
-	font-family:'Tiempos';
-	src:url(../fonts/TiemposHeadline-Regular.eot);
-	src:url(../fonts/TiemposHeadline-Regular.eot?#iefix) format('embedded-opentype'), 		url(../fonts/TiemposHeadline-Regular.woff) format('woff') ,
-		url(../fonts/TiemposHeadline-Regular.ttf) format('truetype') , 		url(../fonts/TiemposHeadline-Regular.svg#roboto_condensedregular) format('svg');
-	font-weight:200;
+@font-face{
+	font-family:'harmonia';
+	src:url(../fonts/RV-Harmonia-Regular.eot);
+	src:url(../fonts/RV-Harmonia-Regular.eot?#iefix) format('embedded-opentype') , 		url(../fonts/RV-Harmonia-Regular.woff) format('woff') ,
+		url(../fonts/RV-Harmonia-Regular.ttf) format('truetype') , 		url(../fonts/RV-Harmonia-Regular.svg#roboto_condensedregular) format('svg');
+	font-weight:400;
+}
+@font-face{
+	font-family:'harmonia';
+	src:url(../fonts/RV-Harmonia-Light.eot);
+	src:url(../fonts/RV-Harmonia-Light.eot?#iefix) format('embedded-opentype'),
+		url(../fonts/RV-Harmonia-Light.woff) format('woff') ,
+		url(../fonts/RV-Harmonia-Light.ttf) format('truetype') , 		url(../fonts/RV-Harmonia-Light.svg#roboto_condensedregular) format('svg');
+	font-weight:200;
+}
+@font-face{
+	font-family:'harmonia';
+	src:url(../fonts/RV-Harmonia-SemiBold.eot);
+	src:url(../fonts/RV-Harmonia-SemiBold.eot?#iefix) format('embedded-opentype'), 		url(../fonts/RV-Harmonia-SemiBold.woff) format('woff') ,
+		url(../fonts/RV-Harmonia-SemiBold.ttf) format('truetype') , 		url(../fonts/RV-Harmonia-SemiBold.svg#roboto_condensedregular) format('svg');
+	font-weight:500;
+}
+@font-face{
+	font-family:'harmonia';
+	src:url(../fonts/RV-Harmonia-Bold.eot);
+	src:url(../fonts/RV-Harmonia-Bold.eot?#iefix) format('embedded-opentype'),
+		url(../fonts/RV-Harmonia-Bold.woff) format('woff') ,
+		url(../fonts/RV-Harmonia-Bold.ttf) format('truetype') , 		url(../fonts/RV-Harmonia-Bold.svg#roboto_condensedregular) format('svg');
+	font-weight:600;
+}
+@font-face{
+	font-family:'Tiempos';
+	src:url(../fonts/TiemposHeadline-Medium.eot);
+	src:url(../fonts/TiemposHeadline-Medium.eot?#iefix) format('embedded-opentype'), 		url(../fonts/TiemposHeadline-Medium.woff) format('woff') ,
+		url(../fonts/TiemposHeadline-Medium.ttf) format('truetype') , 		url(../fonts/TiemposHeadline-Medium.svg#roboto_condensedregular) format('svg');
+	font-weight:400;
+}
+@font-face{
+	font-family:'Tiempos';
+	src:url(../fonts/TiemposHeadline-Regular.eot);
+	src:url(../fonts/TiemposHeadline-Regular.eot?#iefix) format('embedded-opentype'), 		url(../fonts/TiemposHeadline-Regular.woff) format('woff') ,
+		url(../fonts/TiemposHeadline-Regular.ttf) format('truetype') , 		url(../fonts/TiemposHeadline-Regular.svg#roboto_condensedregular) format('svg');
+	font-weight:200;
 }

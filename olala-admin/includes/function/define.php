@@ -18,7 +18,7 @@ define('ERROR_LOG_DIR', ROOT_DIR . DS . 'tmp' . DS . 'logs' . DS . 'error_log');
 define('ADMIN_DIR', '/olala-admin');
 define('TTH_DATA_PREFIX', 'olala_');
 $vLang = (!empty($_SESSION["language"]) && isset($_SESSION["language"])) ? $_SESSION["language"] : 'vi';
-$local_city = !empty($_COOKIE['city']) ? $_COOKIE['city'] : 'DN';
+$local_city = !empty($_COOKIE['admin_city']) ? $_COOKIE['admin_city'] : 'DN';
 define('TTH_LANGUAGE', $vLang);
 $qr = $local_city == 'DN' ? 'vi': 'hue';
 $pLang = (TTH_LANGUAGE == 'vi') ? '' : '/'.TTH_LANGUAGE;

@@ -63,9 +63,9 @@ if (!defined('TTH_SYSTEM')) {
     <ul class="container home-product-menu-mobile m-b-0 animated list-unstyled" role="tablist">
         <?php
         $db->table = "product_menu";
-        $db->condition = "is_active = 1 and category_id = 101";
+        $db->condition = "is_active = 1 and category_id = 101 and product_menu_id <> 277";
         $db->limit = "";
-        $db->order = "";
+        $db->order = "sort ASC";
         $rws = $db->select();
         foreach ($rws  as $rw) {
         ?>
@@ -81,15 +81,15 @@ if (!defined('TTH_SYSTEM')) {
     </ul>
     <div class="overlay-menu-product animated"></div>
 </div>
-<div class="container">
+<div class="container search_container">
     <div id="mixandmatch_responsive_render" style="display:none"></div>
     <div class="hidden-md-up">
         <div class="tab-pane ">
             <?php
             $db->table = "product_menu";
-            $db->condition = "is_active = 1 and category_id = 101";
+            $db->condition = "is_active = 1 and category_id = 101 and product_menu_id <> 277";
             $db->limit = "";
-            $db->order = "";
+            $db->order = "sort ASC";
             $rowdds = $db->select();
             foreach ($rowdds as $rowg) {
                 $id_sub = $rowg['product_menu_id'];
@@ -142,7 +142,7 @@ if (!defined('TTH_SYSTEM')) {
                     $db->table = "product_menu";
                     $db->condition = "is_active = 1 and category_id = 101 and product_menu_id <> 277";
                     $db->limit = "";
-                    $db->order = "";
+                    $db->order = "sort ASC";
                     $rws = $db->select();
                     foreach ($rws  as $rw) {
                     ?>
@@ -214,7 +214,7 @@ if (!defined('TTH_SYSTEM')) {
                         $db->table = "product_menu";
                         $db->condition = "category_id = 101 and product_menu_id <> 277";
                         $db->limit = "";
-                        $db->order = "";
+                        $db->order = "sort ASC";
                         $rowdds = $db->select();
                         foreach ($rowdds as $rowd) {
                             $id_sub = $rowd['product_menu_id'];
@@ -281,11 +281,12 @@ if (!defined('TTH_SYSTEM')) {
         var $page = $(this).attr('data-page');
         var $id = $(this).attr('data-id');
         var that = this;
+        var alignment = $('body').hasClass('body-full') ? 'full-width': '';
         showLoader();
         $.ajax({
             url: '/action.php',
             type: 'POST',
-            data: 'url=getproduct1&id=' + $id + '&page=' + $page,
+            data: 'url=getproduct1&id=' + $id + '&page=' + $page+'&alignment='+alignment,
             dataType: 'json',
             success: function(data) {
                 closeLoader();

@@ -1,7 +1,7 @@
 <?php 
 
 
-$key = isset($_POST['key']) ? $_POST['key']+0 : 0;
+$key = isset($_POST['key']) ? $_POST['key'] : 0;
 $qty = isset($_POST['val']) ? $_POST['val']+0 : 1;
 $id = isset($_POST['id']) ? $_POST['id']+0 : 0;
 $response = array();

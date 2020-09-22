@@ -20,9 +20,9 @@ foreach($rows as $row) {
         <div class="d-filter-material-scroll">
           <div class="title">Categories<span data-dismiss="modal" aria-hidden="true"><img class="svg-inline" src="/images/close.svg"></span></div>
           <?php if($category) : ?>
-          <ul class="block-list">
+          <ul class="block-list list_category_new">
             <?php foreach($category as $cat) : ?>
-            <li>
+            <li data-id="<?php echo $cat['product_menu_id']?>">
               <div class="block-content ">
                 <div class="block-inner">
                   <div class="block-title choose-menu" data-id="<?php echo $cat['product_menu_id'] ?>">CÁC MÓN <?php echo ($cat['name']) ?></div>

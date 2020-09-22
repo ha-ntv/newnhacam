@@ -1,4 +1,10 @@
 
+<?php
+$phone = isset($_POST['phone'])? $_POST['phone']: '';
+$address = isset($_POST['address'])? $_POST['address']: '';
+$km = isset($_POST['km'])? $_POST['km']: 0;
+$cost = isset($_POST['cost'])? $_POST['cost']: 0;
+?>
   <div class="modal-dialog mobile-modal" role="document">
     <div class="modal-content">
       <div class="modal-nav ">
@@ -15,7 +21,7 @@
 	<script type='text/javascript'>
 		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 			directionsService.route({
-			origin: "120 Nguyễn Văn Linh, Vĩnh Trung, Q. Thanh Khê, Đà Nẵng, Việt Nam",
+			origin: "<?php echo getConstant('address_contact') ?>",
 			destination: document.getElementById('main_address').value,
 			travelMode: google.maps.TravelMode.DRIVING
 			}, function(response, status) {
@@ -101,19 +107,19 @@
                 <div class="woocommerce-billing-fields__field-wrapper">
                     <p class="form-row form-row-wide address-field validate-required validate-required" id="main_address_field">
                         <label for="main_address" class="">Địa chỉ<span class="required">*</span></label>
-                        <input type="text" class="input-text pac-target-input" name="main_address" id="main_address" placeholder="Street address" value="" onFocus="geolocate()" required="">
+                        <input type="text" class="input-text pac-target-input" name="main_address" id="main_address" placeholder="Street address" value="<?php echo $address?>" onFocus="geolocate()" required="">
                     </p>
 					<div class="label_error" id="error_address"></div>
 					<p class="form-row form-row-wide validate-required validate-phone validate-required validate-phone" id="billing_phone_field">
                         <label for="billing_phone" class="">Số điện thoại<span class="required">*</span></label>
-                        <input type="text" class="input-text" name="billing_phone" id="billing_phone" placeholder="" value="" autocomplete="tel">
+                        <input type="text" class="input-text" name="billing_phone" id="billing_phone" placeholder="" value="<?php echo $phone?>" autocomplete="tel">
                     </p>
                     <div class="label_error" id="error_phone"></div>
                 </div>
 			</div>
 			<div id="distance"></div>
-			<input type="hidden" name="hidden_input" id="km_distance" value="0">
-			<input type="hidden" name="hidden_cal" id="cal_shipping" value="0">
+			<input type="hidden" name="hidden_input" id="km_distance" value="<?php echo $km ?>">
+			<input type="hidden" name="hidden_cal" id="cal_shipping" value="<?php echo $cost ?> ">
 		</div>
 		
       </div>

@@ -1382,7 +1382,7 @@ function getListToppingForMobile($list)
 
 			$result .= '<div class="custom-control custom-checkbox">
 							<input class="custom-control-input" id="topping-' . $l['product_id'] . '" name="' . $l['name'] . '" type="checkbox" value="' . $l['product_id'] . '">
-							<label class="custom-control-label " for="topping-' . $l['product_id'] . '">' . $l['name'] . '<span class="topping-item-price ">' . formatNumberVN($l['price']) . '</span><span class="unit">VNĐ</span></label>
+							<label class="custom-control-label " for="topping-' . $l['product_id'] . '">' . $l['name'] . '<span class="topping-item-price ">' . formatNumberVN($l['price']) . '</span><span class="unit">đ</span></label>
 						</div>';
 		}
 	}
@@ -1711,7 +1711,7 @@ function showMobileCart2()
 		foreach ($_SESSION['cart'] as $key => $arr) {
 			$keyList = showToppingCart($productMap, $key, $arr);
 			foreach ($keyList as $ele) {
-				$note = $_SESSION['note'] && $_SESSION['note'][$key] && $_SESSION['note'][$key][$ele['key']] ? $_SESSION['note'][$key][$ele['key']]: 'Note..';
+				$note = $_SESSION['note'] && $_SESSION['note'][$key] && $_SESSION['note'][$key][$ele['key']] ? $_SESSION['note'][$key][$ele['key']]: 'Ghi chú món..';
 				$response .= '<div class="d-menu-item row-mod no-gutters false">
 								<div class="col">
 									<div class="menu-item-content"><span class="menu-item-name">' . $productMap[$key]['name'] . '</span>';
@@ -1772,7 +1772,7 @@ function showMobileCart4()
 		foreach ($_SESSION['cart'] as $key => $arr) {
 			$keyList = showToppingCart($productMap, $key, $arr);
 			foreach ($keyList as $ele) {
-				$note = $_SESSION['note'] && $_SESSION['note'][$key] && $_SESSION['note'][$key][$ele['key']] ? $_SESSION['note'][$key][$ele['key']]: 'Note..';
+				$note = $_SESSION['note'] && $_SESSION['note'][$key] && $_SESSION['note'][$key][$ele['key']] ? $_SESSION['note'][$key][$ele['key']]: 'Ghi chú món..';
 				$response .= '<div class="d-menu-item row-mod no-gutters payment-item-root false">
 								<div class="col">
 									<div class="menu-item-content"><span class="menu-item-name">' . $productMap[$key]['name'] . '</span>';
@@ -1848,5 +1848,19 @@ function showMobileCart3()
 	$res['html'] = $response;
 	$res['total'] = $total;
 	$res['total_item'] = $total_item;
+	return $res;
+}
+
+function showCity() {
+	$city = !empty($_COOKIE['city'])? $_COOKIE['city']: 'DN';
+	return $city == 'DN' ? 'Đà Nẵng': 'Huế';
+}
+
+function listCity() {
+	$selectedCity = !empty($_COOKIE['city'])? $_COOKIE['city']: 'DN';
+	$res = '<ul>
+				<li data-id="DN" class="location_select '.($selectedCity == 'DN' ? 'selected': '').'">Đà Nẵng</li>
+				<li data-id="HUE" class="location_select  '.($selectedCity != 'DN' ? 'selected': '').'">Huế</li>
+			</ul>';
 	return $res;
 }

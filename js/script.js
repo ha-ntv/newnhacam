@@ -158,13 +158,9 @@ function sendMail(type, id) {
         dataType: "html",
         success: function(data){
             closeLoader();
-            $query_unt('#' + id);
-            if(type == 'send_order1') {
-            	window.location.href = '/thank-you-reservation'
-            } else {
-            	alert(data);
-            }
-           if(type == 'send_order2') window.location.href = '/thank-you-reservation'
+			$query_unt('#' + id);
+			localStorage.setItem('order_info', JSON.stringify(data))
+            window.location.href = '/thank-you-reservation'
         }
     });
     return false;
@@ -382,6 +378,13 @@ $(document).ready(function(){
 	$(document).on('click','.modal-close', function() {
 		$('#healthymenu-modal').modal('hide');
 	}); 
+	$(document).on('click', '.list_category_new li', function() {
+		$('#healthymenu-modal').modal('hide');
+		let data_id = $(this).attr('data-id')
+		$('html,body').animate({
+			scrollTop: $('#pro-head-' + (data_id) + '-sm').offset().top - 100
+		}, 1000);
+	})
 	$(document).on('click', '.menu-item-input > img', function(){
 		var id = $(this).siblings('input[name="pro-id"]').val();
 		// $('#note_menu2 input[name="key"]').val(id);
@@ -499,6 +502,8 @@ $(document).ready(function(){
 					if (data.success) {
 						$('#voucher').val(code);
 						$('#mobile-address-promote-modal').modal('hide');
+						if($('#after-code').length) $('#after-code .o-function-note').text(code)
+						else 
 						$('.promo-code-btn').append('<div id="after-code"><div class="o-function-note ">'+code+'</div></div>')
 						$('#promo-part').show();
 						$('#promo-calc').text(parseInt(data.value).toLocaleString('de-DE') + 'đ');
@@ -535,10 +540,16 @@ $(document).ready(function(){
 		$('#note_menu').modal('show');
 	})
 	$(document).on('click', '.address-btn', function(){
+		var phone = $('#phone-mb').text();
+		var address = $('#input-address').text();
+		var shipping = $('#after-address .o-function-note').text();
+		var km = shipping &&  shipping.match(/\d+(\.|,?\d+)?/) ? shipping.match(/\d+(\.|,?\d+)?/)[0]: 0;
+		var shipping_cost = $('#shipping-calc').text();
+		shipping_cost = shipping_cost ? shipping_cost.slice(0, -1).replace(/\./g,''): 0;
 		$.ajax({
 			url: '/action.php',
 			type: 'POST',
-			data: 'url=get_address_modal',
+			data: 'url=get_address_modal&phone='+phone+'&address='+address+'&km='+km+'&cost='+shipping_cost,
 			dataType: 'html',
 			success: function(data) {
 				$('#mobile-address-promote-modal').html(data);
@@ -575,10 +586,24 @@ $(document).ready(function(){
 		$('#after-address').remove()
 		$('#address_mb').remove()
 		$('#phone_mb').remove()
-		$('.address-btn').append('<div id="after-address"><div class="o-function-note "> Khoảng cách: '+km+' km</div></div>')
-		$('#payment_mb_modal').append('<div id="address_mb"><hr class="hr-space o-hr"><section class="address-section"> Địa chỉ ship: <span id="input-address">'+address+'</span></section></div>')
-		$('#payment_mb_modal').append('<div id="phone_mb"><hr class="hr-space o-hr"><section class="phone-section"> Số điện thoại:<span id="phone-mb">'+phone+'</span></section></div>')
-		$('#note-address-promo').append('<div class="o-function-item modal-button promo-code-btn"><div class="o-function-img " ><img src="/images/cart-tag.svg" class="inline-svg"></div><div class="o-function-note text-truncate"><span class="false align-middle">Promotion</span></div></div>')
+		if($('#after-address').length) {
+			$('#after-address .o-function-note').text('Khoảng cách: '+km+' km')
+			$('#input-address').text(address)
+		} else {
+			$('.address-btn').append('<div id="after-address"><div class="o-function-note "> Khoảng cách: '+km+' km</div></div>')
+			$('#payment_mb_modal').append('<div id="address_mb"><hr class="hr-space o-hr"><section class="address-section"> Địa chỉ ship: <span id="input-address">'+address+'</span></section></div>')
+			
+		}
+		if($('#note-address-promo .promo-code-btn').length) {
+
+		} else {
+			$('#note-address-promo').append('<div class="o-function-item modal-button promo-code-btn"><div class="o-function-img " ><img src="/images/cart-tag.svg" class="inline-svg"></div><div class="o-function-note text-truncate"><span class="false align-middle">Promotion</span></div></div>')
+		}
+		if(!$('#phone_mb').length) {
+			$('#payment_mb_modal').append('<div id="phone_mb"><hr class="hr-space o-hr"><section class="phone-section"> Số điện thoại:<span id="phone-mb">'+phone+'</span></section></div>')
+		} else {
+			$('#phone-mb').text(phone)
+		}
 	})
 	$(document).on('click', '.modal-close-update-cart', function(){
 		var totalItem = $('#payment_total_item').text();
@@ -630,15 +655,22 @@ $(document).ready(function(){
 		var promo = $('#promo-calc').text().replace(/\./g, '');
 		var phone = $('#phone-mb').text();
 		var address = $('#input-address').text();
+		var day =  new Date().getDate();
+		var month =  parseInt(new Date().getMonth()) + 1
+		var year = new Date().getFullYear();
+		var hour = new Date().getHours();
+		var minute = new Date().getMinutes()  
+		var time = day + '/' + month + '/' + year + ' ' + (hour > 9 ? hour : '0'+hour) + ':' + (minute > 9 ? minute : '0'+ minute); 
 		if(address && phone && shipping)  {
 			showLoader();
 			$.ajax({
 				url:'/action.php',
 				type: 'POST',
-				data: 'url=send_order2&shipping='+shipping+'&code='+code+'&promo='+promo+'&phone='+phone,
+				data: 'url=send_order2&shipping='+shipping+'&code='+code+'&promo='+promo+'&phone='+phone+'&address='+address+'&time='+time,
 				dataType: "html",
 				success: function(data){
 					closeLoader();
+					localStorage.setItem('order_info', JSON.stringify(data))
 					window.location.href = '/thank-you-reservation'
 				}
 			});
@@ -684,11 +716,90 @@ $(document).ready(function(){
 	$(document).on('click', '#set-list', function(){
 		$('.list-realty .healthymenuProductBox ').each(function(){
 			$(this).addClass('full-width');
+			$('body').addClass('body-full');
 		})
 	})
 	$(document).on('click', '#set-grid', function(){
 		$('.list-realty .healthymenuProductBox ').each(function(){
 			$(this).removeClass('full-width');
+			$('body').removeClass('body-full');
 		})
+	})
+	$(document).on('click', '.display_all', function(){
+		$(this).siblings('a').toggleClass('stretch-all')
+	
+		var txt = $(this).text();
+		$(this).text(txt == 'Hiển thị thêm' ? 'Thu gọn': 'Hiển thị thêm')
+		var index = parseInt($(this).closest('.main-realty .healthymenuProductBox ').index())
+		var parent =  $(this).closest('.healthymenuProductBox')
+		parent.find('.next-lag').addClass('auto-height');
+		var height = parent.find('.next-lag').height();
+		if(index%2) {
+			parent.prev().find('.next-lag').removeClass('auto-height')
+			var prevHeight = parent.prev().find('.stretch-all').length ? parent.prev().find('.next-lag').height() : 0;
+			parent.prev().find('.next-lag').height(prevHeight < height ? height: prevHeight);
+		} else {
+			
+			parent.next().find('.next-lag').removeClass('auto-height')
+			var nextHeight = parent.next().find('.stretch-all').length ? parent.next().find('.next-lag').height() : 0;
+			parent.next().find('.next-lag').height(nextHeight < height ?  height: nextHeight);
+		}
+	})
+	$(document).on('click', '.display_all_modal', function(){
+		$(this).siblings('div').toggleClass('stretch-all')
+		var txt = $(this).text();
+		$(this).text(txt == 'Hiển thị thêm' ? 'Thu gọn': 'Hiển thị thêm')
+	});
+	$(document).on('click', '.location_select', function(){
+		var yourCity = $(this).data('id');
+			
+			localStorage.setItem('nhacam_city', yourCity);
+			$.ajax({
+				url:'/action.php',
+				type: 'POST',
+				data: 'url=set_city&city='+yourCity,
+				dataType: "html",
+				success: function(data){
+					closeLoader();
+					setTimeout(() => {
+						window.location.reload();
+					}, 1000);
+				}
+			})
+	})
+	$(document).on('click', '.city_show', function(){
+		$(this).find('ul').slideToggle();
+	})
+	$(document).on('click', '.search_btn_all', function(e){
+		e.preventDefault();
+		var kw = $('.search_kw').val()
+		
+			$.ajax({
+				url:'/action.php',
+				type: 'POST',
+				data: 'url=search_all&keyword='+kw,
+				dataType: "html",
+				success: function(data){
+					$('.search_container').html(data)
+				}
+			})
+		
+	})
+	$(document).on('click', '.clear_search', function(){
+		var kw = $('.search_kw').val();
+		if(kw) {
+			$('.search_kw').val('');
+			var kw = '';
+			$.ajax({
+				url:'/action.php',
+				type: 'POST',
+				data: 'url=search_all&keyword='+kw,
+				dataType: "html",
+				success: function(data){
+					$('.search_container').html(data)
+				}
+			})
+		}
+		
 	})
 })

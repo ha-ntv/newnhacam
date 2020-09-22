@@ -24,7 +24,7 @@
                                               $keyword = isset($_REQUEST['keyword']) ? $_REQUEST['keyword'] : '';
                                               if($keyword != ''){
                                                 $db->table ="product";
-                                                $db->condition = "name like '%".$keyword."%' or comment like '%".$keyword."%' or content like '%" .$keyword ."%'";
+                                                $db->condition = "name like '%".$keyword."%' or comment like '%".$keyword."%' or content like '%" .$keyword ."%' and product_menu_id <> 277";
                                                 $db->limit= "";
                                                 $db->order = "";
                                                 $rows = $db->select();

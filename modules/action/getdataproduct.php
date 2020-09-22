@@ -33,11 +33,12 @@ echo '</section>';
 	 $('.btn_dd').click(function(){
             $page = $('.page').val();
             $id = $('.page').attr('data_id');
+            var alignment = $('body').hasClass('body-full') ? 'full-width': '';
             showLoader();
             $.ajax({
                 url:'/action.php',
                 type: 'POST',
-                data: 'url=getproduct&id='+$id+'&page='+$page,
+                data: 'url=getproduct&id='+$id+'&page='+$page+'&alignment='+alignment,
                 dataType: 'html',
                 success: function(data){
                     closeLoader();

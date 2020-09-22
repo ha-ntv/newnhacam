@@ -67,7 +67,12 @@
       ?>
        <span class="totalProduct"><?php echo $total_item ?></span>
      <?php } ?>
-   </a></li>
+   </a>
+  </li>
+  <li class="city_show"><?php echo showCity() ?>
+        <img src="/images/caret-down.svg" title="Chọn chi nhánh" alt="Chọn chi nhánh" >
+        <?php echo listCity();?>
+  </li>
  </ul>
  <div class="container hidden-lg-up cart_items_list animated fadeOut" style="display: none;">
    <form id="frm_editcard">

@@ -57,7 +57,7 @@ if ($id != 0) {
 							<div class="btn-add-cart-wrapper pull-right">
 								<input value="<?php echo $row['product_id'] ?>" type="hidden" name="id">
 								<input type="hidden" name="addCart">
-								<button type="button" class="modal-add-cart-btn btnAddtocart  addtocart pull-right " style="background: none;border:none;cursor: pointer;">
+								<button data-children="<?php echo $row['children'] ?>" type="button" class="modal-add-cart-btn btnAddtocart  addtocart pull-right " style="background: none;border:none;cursor: pointer;">
 									<img src="/img/responsive/cart.png" alt=" " style="width: 27px;">
 								</button>
 							</div>
@@ -68,6 +68,7 @@ if ($id != 0) {
 			</div>
 		<?php
 		} else {
+			$strip = strip_tags($row['content']) ? strlen(strip_tags($row['content'])): 0;
 		?>
 			<div class="modal-dialog mobile-modal">
 				<div class="modal-content animate-bottom">
@@ -92,6 +93,7 @@ if ($id != 0) {
 							<div class="col" style="width: calc(100% - 100px)">
 								<div class="menu-item-content">
 									<h4 class="menu-item-name text-truncate"><?php echo $row['name'] ?></h4>
+									<div class="menu-item-content-description"><div class="<?php echo $strip ? 'catching': ''?>"><?php echo strip_tags($row['content']) ?></div><?php echo $strip ? '<span class="display_all_modal">Hiển thị thêm</span>': '' ?></div>
 									<div class="menu-item-price"><span class="price" id="one-pro-price"><?php echo number_format($row['price'], '0', ',', '.') ?></span> VNĐ</div>
 									<div class="menu-item-ordernum"><img class="svg-inline" src="/images/cart.svg" style="width:25px"><span class="pl-1"><?php echo showOrderCount($row['order_count']) ?></span></div>
 								</div>
@@ -111,7 +113,7 @@ if ($id != 0) {
 						<div class="menu-item-input" style="display:flex">
 							<input type="hidden" name="pro-id" value="<?php echo $row['product_id']?>" >
 							<img class="svg-inline menu-item-input-icon" src="/images/cart-pen.svg" >
-							<textarea class="form-control txt-note" rows="1" placeholder="Note"></textarea>
+							<textarea class="form-control txt-note" rows="1" placeholder="Ghi chú món"></textarea>
 						</div>
 						<div>
 							<?php
@@ -120,7 +122,7 @@ if ($id != 0) {
 								<div class="menu-item-type text-truncate">
 									<strong class="h5 font-weight-bold">Thêm topping</strong>
 								</div>
-								<div class="menu-item-option">
+								<div class="menu-item-option topping-area">
 									<?php
 									echo getListToppingForMobile($row['children']);
 									?>

@@ -910,3 +910,8 @@ function extractListEmail($text) {
 
     return $result;
 }
+
+function showCityAdmin() {
+	$city = !empty($_SESSION['admin_city'])? $_SESSION['admin_city']: 'DN';
+	return $city == 'DN' ? 'Đà Nẵng': 'Huế';
+}

@@ -64,17 +64,18 @@ if($slug_cat != 'contact'){ ?>
 </div>
 <?php } ?>
 <div class="clearfix"></div>
-<div class="container hidden-md-up p-t">
+<div class="container hidden-md-up p-t search_area">
     <div class="row">
         <form action="<?php echo HOME_URL_LANG ?>/search" method="get">
             <div class="col-xs-8 hidden-md-up p-r-0">
                 <div class="icon-addon addon-md">
-                    <input type="search" placeholder="SEARCH" class="form-control" name="keyword" value="" style="border-radius: 0">
-                    <label class="fa fa-search" rel="tooltip" title="email"></label>
+                    <input type="search" placeholder="Tìm món" class="form-control search_kw" name="keyword" value="" style="border-radius: 0">
+                    <label class="fa fa-search" rel="tooltip" title="món"></label>
+                    <span class="clear_search"><img src="/images/close2.svg" title="close"></span>
                 </div>
             </div>
             <div class="col-xs-4 hidden-md-up p-l-0">
-                <input type="submit" value="SEARCH" class="btn btn-danger btn-sm form-control" style="border-radius: 0;height: 33px;background:#fbb743;border-color: #d7a857">
+                <input type="submit" value="SEARCH" class="btn btn-danger btn-sm form-control search_btn_all" style="border-radius: 0;height: 33px;background:#fbb743;border-color: #d7a857">
             </div>
         </form>
     </div>

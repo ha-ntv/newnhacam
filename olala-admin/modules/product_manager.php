@@ -248,11 +248,9 @@ if($del != 0) {
 	                        ?>
                         </td>
                         <td align="center">
-                            <a href="?<?php echo TTH_PATH?>=product_menu_add&id_cat=<?php echo $row["category_id"]?>"><img data-toggle="tooltip" data-placement="left" title="Thêm mục" src="images/add.png"></a>
-                            &nbsp;
+                            
                             <a href="?<?php echo TTH_PATH?>=category_edit&id_cat=<?php echo $row["category_id"]?>"><img data-toggle="tooltip" data-placement="top" title="Chỉnh sửa" src="images/edit.png"></a>
-	                        &nbsp;
-	                        <span style="width: 16px; height: 1px; display: inline-block;""></span>
+	                       
                         </td>
                         <td align="center">&nbsp;</td>
                         <?php
@@ -358,11 +356,9 @@ function loadMenuCategory($db, $level, $parent, $category_id){
 	            <?php
 				if ($level < 30){
 	            ?>
-                <a href="?<?php echo TTH_PATH?>=product_menu_add&id_cat=<?php echo $row["category_id"]?>&id_pro=<?php echo $row["product_menu_id"]?>"><img data-toggle="tooltip" data-placement="left" title="Thêm mục" src="images/add.png"></a>
-                &nbsp;
+               
 				<?php } else { ?>
-					<span style="width: 16px; height: 1px; display: inline-block;""></span>
-					&nbsp;
+					
 				<?php } ?>
 	            <a href="?<?php echo TTH_PATH?>=product_menu_edit&id=<?php echo $row["product_menu_id"]?>"><img data-toggle="tooltip" data-placement="top" title="Chỉnh sửa" src="images/edit.png"></a>
                 &nbsp;

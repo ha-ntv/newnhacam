@@ -1,6 +1,8 @@
 <?php 
 $id 	= isset($_POST['id']) ? $_POST['id'] : 0;
 $page   = isset($_POST['page']) ? $_POST['page'] : 1;
+$alignment = isset($_POST['alignment']) ? $_POST['alignment'] : 'no';
+$layout = $alignment != 'no'  && $alignment != '' ? 'full-width': '';
 $page   = $page + 1;  
 $per_page = 8;
 $page = $per_page * $page;

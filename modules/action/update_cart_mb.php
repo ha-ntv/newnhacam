@@ -10,8 +10,6 @@ foreach($data as $item => $val) {
     $key = $dt[1];
     $id_arr[]= $id;
     $key_arr[]= $key;
-    var_dump($id);
-    var_dump($key);
     $_SESSION['cart'][$id][$key] = $val+0;
 }
 foreach($_SESSION['cart'] as $id => $arr) {
